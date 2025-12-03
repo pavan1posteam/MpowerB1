@@ -106,7 +106,9 @@ namespace MPower
             }
         }
         public static void Mpower(POSModel model)//MPOWER BATCH 01
-        {//testing for github
+        {
+
+           // pulling from git hub now
             model.BaseUrl = "https://mpowerapi.azurewebsites.net/api/v1/Items/search?";
             clsmPower clsmPower = new clsmPower(model.StoreId, model.BaseUrl, model.ApiKey, model.tax, model.LocationId, model.Code, model.IsSalePrice, model.LiquorWineTax, model.BeerTax, model.MiscNonAlcoholTax, model.GroceryTax);
             Console.WriteLine();
