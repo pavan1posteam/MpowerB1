@@ -152,7 +152,7 @@ namespace MPower
                     {
                         new clsEmail().sendEmail(DeveloperId, "", "", "Error in MPOWER_POS@" + DateTime.UtcNow + " GMT", ex.Message + StoreId + "<br/>" + ex.StackTrace);
                         Console.WriteLine(ex.Message);
-                        Console.ReadLine();
+                        //Console.ReadLine();
                     }
                     finally { }
                 }
@@ -1054,6 +1054,14 @@ namespace MPower
                                     {
                                         prod.price = item.Suggested;
                                         fname.Price = item.Suggested;
+                                        if (fname.pcat1.ToString().ToUpper() == "CIGARS" ||
+                                            fname.pcat1.ToString().ToUpper() == "CIGARETTES" ||
+                                            fname.pcat1.ToString().ToUpper() == "TOBACCO" ||
+                                            fname.pcat1.ToString().ToUpper() == "THC")
+                                        {
+                                            prod.price = Convert.ToDecimal(item.AdditionalUpc[0].Retail) + 1;
+                                            fname.Price = prod.price;
+                                        }
                                     }
                                     else
                                     {
@@ -1433,11 +1441,20 @@ namespace MPower
                                         prod1.storeid = StoreId;
                                         prod1.price = Convert.ToDecimal(item.AdditionalUpc[0].Retail); ;
                                         fname1.Price = prod1.price;
+                                        
                                         prod1.StoreProductName = prod.StoreProductName;
                                         fname1.pname = prod.StoreProductName;
                                         prod1.Storedescription = prod.Storedescription;
                                         fname1.pcat = item.Category;
-                                        fname1.pdesc = prod.Storedescription;
+                                        // add dollar condition for tobbaco  
+                                        if ( fname1.pcat.ToString().ToUpper() == "CIGARS" ||
+                                            fname1.pcat.ToString().ToUpper() == "CIGARETTES" ||
+                                            fname1.pcat.ToString().ToUpper() == "TOBACCO" || 
+                                            fname1.pcat.ToString().ToUpper() == "THC" ) { 
+                                            prod1.price = Convert.ToDecimal(item.AdditionalUpc[0].Retail) + 1 ;
+                                            fname1.Price = prod1.price ;
+                                        }
+                                            fname1.pdesc = prod.Storedescription;
                                         prod1.sprice = 0;
 
                                         if (item.AdditionalUpc[0].CaseQuantity != null)
