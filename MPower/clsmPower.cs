@@ -1054,12 +1054,13 @@ namespace MPower
                                     {
                                         prod.price = item.Suggested;
                                         fname.Price = item.Suggested;
+                                        // add dollar condition for tobbaco  
                                         if (fname.pcat1.ToString().ToUpper() == "CIGARS" ||
                                             fname.pcat1.ToString().ToUpper() == "CIGARETTES" ||
                                             fname.pcat1.ToString().ToUpper() == "TOBACCO" ||
                                             fname.pcat1.ToString().ToUpper() == "THC")
                                         {
-                                            prod.price = Convert.ToDecimal(item.AdditionalUpc[0].Retail) + 1;
+                                            prod.price = prod.price + 1;
                                             fname.Price = prod.price;
                                         }
                                     }
@@ -1251,6 +1252,14 @@ namespace MPower
                                         else if (item.Suggested > item.Retail)
                                         {
                                             prod.sprice = item.Retail;
+                                            // add dollar condition for tobbaco  
+                                            if (fname.pcat.ToString().ToUpper() == "CIGARS" ||
+                                                fname.pcat.ToString().ToUpper() == "CIGARETTES" ||
+                                                fname.pcat.ToString().ToUpper() == "TOBACCO" ||
+                                                fname.pcat.ToString().ToUpper() == "THC")
+                                            {
+                                                prod.sprice = prod.sprice + 1;
+                                            }
                                         }
                                     }
                                     if (prod.sprice > 0)
