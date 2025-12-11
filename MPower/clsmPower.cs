@@ -239,6 +239,12 @@ namespace MPower
 
                     totalpages = fresult.TotalPages;
                 }
+                else if (429 == Convert.ToInt32(response.StatusCode))
+                {
+                    Thread.Sleep(10000);
+                    var result = getProductDetails(BaseUrl, accessToken, pageno, LocationId);
+                    return result;
+                }
                 //File.AppendAllText("11836.json", response.Content);
             }
             catch (Exception ex)
