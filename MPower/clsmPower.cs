@@ -594,6 +594,10 @@ namespace MPower
                                     }
                                     else { continue; }
                                     prod.qty = Convert.ToInt32(item.QuantityOnHand);
+                                    if (staticqty.Contains(StoreId.ToString()))
+                                    {
+                                        prod.qty = 999;
+                                    }
                                     if (!string.IsNullOrEmpty(item.upc))
                                     {
                                         prod.upc = "#" + item.upc.ToString().Trim();
@@ -941,7 +945,10 @@ namespace MPower
                                 {
                                     products.qty = Convert.ToInt32(item.QuantityOnHand);
                                 }
-
+                                if (staticqty.Contains(StoreId.ToString()))
+                                {
+                                    prod.qty = 999;
+                                }
                                 if (!string.IsNullOrEmpty(item.upc))
                                 {
                                     products.upc = "#" + item.upc.ToString().Trim();
@@ -1115,6 +1122,10 @@ namespace MPower
                                 else
                                 {
                                     //continue; 
+                                }
+                                if (staticqty.Contains(StoreId.ToString()))
+                                {
+                                    prod.qty = 999;
                                 }
                                 if (nowebactivecondition.Contains(StoreId.ToString()))// added deposit from response ticket #21307
                                 {
@@ -1418,7 +1429,7 @@ namespace MPower
                                     exProd.Add(prod);
                                     fullname.Add(fname);
                                 }
-                                else if (WebActive && prod.qty > 0 && prod.price > 0)
+                                else if (WebActive  && prod.price > 0)//&& prod.qty > 0
                                 {
                                     exProd.Add(prod);
                                     fullname.Add(fname);
@@ -1603,6 +1614,10 @@ namespace MPower
                         else
                         {
                             //continue;
+                        }
+                        if (staticqty.Contains(StoreId.ToString()))
+                        {
+                            prod.qty = 999;
                         }
                         if (!string.IsNullOrEmpty(item.upc))
                         {
