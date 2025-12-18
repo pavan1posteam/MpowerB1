@@ -21,7 +21,7 @@ namespace MPower.Models
             try
             {
                 List<SqlParameter> sparams = new List<SqlParameter>();
-                string filepath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Batch.json");
+                string filepath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Batch.json");//
                 Batch readcontent = null;
                 if (File.Exists(filepath))
                 {
