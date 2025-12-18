@@ -23,6 +23,7 @@ mono_crash.*
 !bin/Debug/
 !bin/Debug/Deposit.json
 !bin/Debug/DepositFile.json
+!bin/Debug/Batch.json
 
 [Dd]ebugPublic/
 [Rr]elease/
