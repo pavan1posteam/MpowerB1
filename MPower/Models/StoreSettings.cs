@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +21,14 @@ namespace MPower.Models
             try
             {
                 List<SqlParameter> sparams = new List<SqlParameter>();
-                sparams.Add(new SqlParameter("@BatchId", 1));
+                string filepath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Batch.json");
+                Batch readcontent = null;
+                if (File.Exists(filepath))
+                {
+                    var content = File.ReadAllText(filepath);
+                    readcontent = JsonConvert.DeserializeObject<Batch>(content);
+                }
+                sparams.Add(new SqlParameter("@BatchId", readcontent.BatchId));
                 string constr = ConfigurationManager.AppSettings.Get("LiquorAppsConnectionString");
                 using (SqlConnection con = new SqlConnection(constr))
                 {
@@ -118,5 +126,9 @@ namespace MPower.Models
     {
         public string catid { get; set; }
         public string catname { get; set; }
+    }
+    public class Batch
+    {
+        public int BatchId { get; set; }
     }
 }
